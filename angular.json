@@ -80,6 +80,13 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/AgGrid/",
+            "dir": "dist/ag-grid/browser"
+          }
         }
       }
     }

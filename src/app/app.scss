@@ -1,0 +1,89 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.glass {
+  position: relative;
+  background: rgb(250 255 250 / 1%);
+  backdrop-filter: blur(2px) saturate(180%);
+  border: 0.0625rem solid rgb(255 255 255 / 20%);
+  border-radius: 2rem;
+  padding: 1.25rem;
+  box-shadow:
+    0 8px 32px rgba(31, 38, 135, 0.2),
+    inset 0 4px 20px rgba(255, 255, 255, 0.3);
+}
+
+.glass::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  backdrop-filter: blur(1px);
+  box-shadow:
+    inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+    inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+  opacity: 0.6;
+  z-index: -1;
+  filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+  pointer-events: none;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+
+  flex: 1;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  flex: 1;
+}
+
+.avatar-block {
+  display: flex;
+  gap: 16px;
+}
+
+.calendar-block {
+  display: flex;
+  justify-content: center;
+}
+
+.action-block {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.info-card {
+  display: flex;
+  gap: 24px;
+}

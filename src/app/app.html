@@ -1,0 +1,170 @@
+<tui-root>
+  <div class="floating-shape shape-1"></div>
+  <div class="floating-shape shape-2"></div>
+  <div class="floating-shape shape-3"></div>
+
+  <div class="app-shell">
+    <app-header />
+
+    <main class="main">
+      <router-outlet />
+
+      <div class="parent">
+        <div class="block">
+          <div class="glass item">
+            <tui-textfield tuiChevron>
+              <input tuiSelect [(ngModel)]="valueSelect" />
+
+              <tui-data-list-wrapper *tuiDropdown [items]="users" />
+            </tui-textfield>
+
+            @if (valueSelect) {
+              <a
+                tuiButton
+                appearance="primary"
+                [href]="valueSelect.site"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="margin-top: 16px"
+              >
+                Перейти на сайт {{ valueSelect.name }}
+              </a>
+            }
+          </div>
+          <div class="glass item">
+            <div class="info-card">
+              <div class="block">
+                <p class="avatar-block">
+                  <span size="l" tuiAvatar="AI" [tuiSkeleton]="skeleton"></span>
+                  <span size="l" tuiAvatar="@tui.user" [tuiSkeleton]="skeleton">
+                    <img alt="" src="https://avatars.githubusercontent.com/u/11832552" />
+                  </span>
+                  <span size="l" tuiAvatar="❤️" [tuiSkeleton]="skeleton"></span>
+                  <span appearance="primary" size="l" tuiAvatar="$" [tuiSkeleton]="skeleton"></span>
+                </p>
+                <p>
+                  <tui-textfield [tuiSkeleton]="skeleton">
+                    <label tuiLabel>Input</label>
+                    <input tuiInput value="Some value" [readOnly]="skeleton" />
+                  </tui-textfield>
+                </p>
+                <section appearance="neutral" tuiCardLarge [tuiSkeleton]="skeleton">
+                  <h2 tuiHeader>
+                    <span tuiTitle>
+                      Card
+                      <span tuiSubtitle>Subtitle</span>
+                    </span>
+                  </h2>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua.
+                </section>
+              </div>
+              <div class="flex">
+                <p>
+                  <tui-progress-circle [tuiSkeleton]="skeleton" [value]="0.33" />
+                  <tui-avatar-stack>
+                    <span size="l" tuiAvatar="AI" [tuiSkeleton]="skeleton"></span>
+                    <span size="l" tuiAvatar="@tui.user" [tuiSkeleton]="skeleton">
+                      <img alt="" src="https://avatars.githubusercontent.com/u/11832552" />
+                    </span>
+                    <span size="l" tuiAvatar="❤️" [tuiSkeleton]="skeleton"></span>
+                    <span
+                      appearance="primary"
+                      size="l"
+                      tuiAvatar="$"
+                      [tuiSkeleton]="skeleton"
+                    ></span>
+                  </tui-avatar-stack>
+                </p>
+                <div class="block">
+                  <button tuiButton type="button" [tuiSkeleton]="skeleton">Awesome</button>
+                  <button appearance="secondary" tuiButton type="button" [tuiSkeleton]="skeleton">
+                    Cool
+                  </button>
+                  <span tuiChip [tuiSkeleton]="skeleton"> Chip </span>
+                  <span tuiBadge [tuiSkeleton]="skeleton"> Dale </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="glass item" style="--col-span: 3; --col-start: 3">
+            <div class="calendar-block">
+              <tui-calendar
+                [tuiSkeleton]="skeleton"
+                [value]="value"
+                (dayClick)="onDayClick($event)"
+              />
+            </div>
+          </div>
+          <div class="glass item" style="--col-span: 3; --col-start: 3; --row-start: 3">
+            <div class="flex">
+              <p class="avatar-block">
+                <span size="xl" tuiAvatar="AI" [tuiSkeleton]="skeleton"></span>
+                <span size="xl" tuiAvatar="@tui.user" [tuiSkeleton]="skeleton">
+                  <img alt="" src="https://avatars.githubusercontent.com/u/11832552" />
+                </span>
+                <span size="xl" tuiAvatar="❤️" [tuiSkeleton]="skeleton"></span>
+                <span size="xl" tuiAvatar="❤️" [tuiSkeleton]="skeleton"></span>
+                <span size="xl" tuiAvatar="❤️" [tuiSkeleton]="skeleton"></span>
+                <span appearance="primary" size="xl" tuiAvatar="$" [tuiSkeleton]="skeleton"></span>
+              </p>
+              <p class="action-block">
+                <button size="l" tuiButton type="button" [tuiSkeleton]="skeleton">Small</button>
+                <button size="l" tuiButton type="button" [tuiSkeleton]="skeleton">Small</button>
+              </p>
+            </div>
+          </div>
+          <div class="glass item" style="--col-span: 3; --col-start: 3; --row-start: 2">
+            <div class="flex">
+              <div class="avatar-block">
+                <span size="xxl" tuiAvatar="AI" [tuiSkeleton]="skeleton"></span>
+                <div>
+                  <span
+                    [tuiSkeleton]="
+                      skeleton
+                        ? 'This text serves as the content behind the skeleton and  This text serves as the content behind the skeleton and depending on its length, the skeleton will adjust to fit it. ll adjust to fit it.'
+                        : ''
+                    "
+                  >
+                    {{ skeleton ? '' : 'This text will be replaced by a placeholder.' }}
+                  </span>
+                  <br />
+                  <span [tuiSkeleton]="skeleton ? 'This text serves fsdf  dasd   das' : ''"> </span>
+                  <span
+                    [tuiSkeleton]="
+                      skeleton
+                        ? 'This text serves as the content behind the s ngth, the skeleton will adjust to fit it. ll adjust to fit it.'
+                        : ''
+                    "
+                  >
+                    {{ skeleton ? '' : 'This text will be replaced by a placeholder.' }}
+                  </span>
+                  <span
+                    [tuiSkeleton]="
+                      skeleton
+                        ? 'This text serves as the content behind the skeleton and  This text serves as the content behind the skeleton and depending on its length, the skeleton will adjust to fit it. ll adjust to fit it.'
+                        : ''
+                    "
+                  >
+                    {{ skeleton ? '' : 'This text will be replaced by a placeholder.' }}
+                  </span>
+                  <span
+                    [tuiSkeleton]="
+                      skeleton
+                        ? 'This text serves as the content bf the skeleton will adjust to fit it. ll adjust to fit it.'
+                        : ''
+                    "
+                  >
+                    {{ skeleton ? '' : 'This text will be replaced by a placeholder.' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</tui-root>

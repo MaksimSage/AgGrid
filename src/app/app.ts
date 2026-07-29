@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Header } from './core/header/header';
 import {
   TuiAvatar,
@@ -7,6 +6,7 @@ import {
   TuiBadge,
   TuiChevron,
   TuiChip,
+  TuiComboBox,
   TuiDataListWrapper,
   TuiProgress,
   TuiSelect,
@@ -15,16 +15,18 @@ import {
 import {
   TuiButton,
   TuiCalendar,
+  TuiFilterByInputPipe,
+  TuiIcon,
   TuiInput,
   tuiItemsHandlersProvider,
+  TuiNotificationService,
   TuiRoot,
   TuiTextfield,
 } from '@taiga-ui/core';
 import { FormsModule } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
-import { TuiTable } from '@taiga-ui/addon-table';
 
-interface Character {
+interface Institution {
   readonly id: number;
   readonly name: string;
   readonly site: string;
@@ -33,7 +35,6 @@ interface Character {
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
     Header,
     TuiRoot,
     FormsModule,
@@ -46,32 +47,34 @@ interface Character {
     TuiCalendar,
     TuiDataListWrapper,
     TuiSelect,
-    TuiChevron,
-    TuiTable,
     TuiChip,
     TuiBadge,
     TuiProgress,
     TuiAvatarStack,
+    TuiComboBox,
+    TuiIcon,
+    TuiChevron,
+    TuiFilterByInputPipe,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     tuiItemsHandlersProvider({
-      stringify: signal((x: Character) => x.name),
-      identityMatcher: signal((a: Character, b: Character) => a.id === b.id),
-      disabledItemHandler: signal((x: Character) => x?.name?.includes('Trevor')),
+      stringify: signal((x: Institution | null) => x?.name ?? ''),
+      identityMatcher: signal((a: Institution, b: Institution) => a.id === b.id),
     }),
   ],
 })
 export class App {
-  protected readonly title = signal('mood');
+  private alerts = inject(TuiNotificationService);
 
   protected skeleton = true;
   protected value: TuiDay | null = null;
-  protected readonly users: Character[] = [
+
+  protected readonly institutions: Institution[] = [
     { id: 1, name: 'Портал Госуслуги', site: 'https://www.gosuslugi.ru' },
-    { id: 2, name: 'ФНС России (Налоговая)', site: 'https://www.nalog.gov.ru' },
+    { id: 2, name: 'ФНС России (Налоговая)', site: 'https/www.nalog.gov.ru' },
     { id: 3, name: 'Социальный фонд России (СФР)', site: 'https://sfr.gov.ru' },
     { id: 4, name: 'Росреестр', site: 'https://rosreestr.gov.ru' },
     { id: 5, name: 'ГИБДД', site: 'https://гибдд.рф' },
@@ -84,9 +87,33 @@ export class App {
     { id: 12, name: 'Роструд', site: 'https://rostrud.gov.ru' },
   ];
 
-  protected valueSelect: Character | null = this.users[0];
+  protected valueSelect: Institution | null = null;
 
   protected onDayClick(day: TuiDay): void {
     this.value = day;
+  }
+
+  protected openSite(): void {
+    if (!this.valueSelect?.site) {
+      return;
+    }
+    try {
+      new URL(this.valueSelect.site);
+
+      window.open(this.valueSelect.site, '_blank', 'noopener,noreferrer');
+    } catch (error) {
+      console.error('❌ Ошибка перехода по ссылке:', {
+        institution: this.valueSelect.name,
+        url: this.valueSelect.site,
+        error: error,
+        timestamp: new Date().toISOString(),
+      });
+      this.alerts
+        .open(`При переходе на страницу ${this.valueSelect.name}`, {
+          label: 'Упс, произошла ошибка',
+          appearance: 'negative',
+        })
+        .subscribe();
+    }
   }
 }

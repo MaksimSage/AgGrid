@@ -11,23 +11,24 @@
       <div class="parent">
         <div class="block">
           <div class="glass item">
+            <label tuiLabel  class="inputLabel">Государственное учреждение</label>
             <tui-textfield tuiChevron>
               <input tuiSelect [(ngModel)]="valueSelect" />
 
-              <tui-data-list-wrapper *tuiDropdown [items]="users" />
+              <tui-data-list-wrapper *tuiDropdown [items]="institutions" />
             </tui-textfield>
 
             @if (valueSelect) {
-              <a
+              <button
                 tuiButton
                 appearance="primary"
-                [href]="valueSelect.site"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="margin-top: 16px"
+                type="button"
+                (click)="openSite()"
+                style="margin-top: 16px;"
               >
                 Перейти на сайт {{ valueSelect.name }}
-              </a>
+                <tui-icon icon="@tui.external-link" style="margin-left: 8px;" />
+              </button>
             }
           </div>
           <div class="glass item">

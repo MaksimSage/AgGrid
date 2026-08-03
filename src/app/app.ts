@@ -74,7 +74,7 @@ export class App {
 
   protected readonly institutions: Institution[] = [
     { id: 1, name: 'Портал Госуслуги', site: 'https://www.gosuslugi.ru' },
-    { id: 2, name: 'ФНС России (Налоговая)', site: 'https://www.gosuslugi.ru' },
+    { id: 2, name: 'ФНС России (Налоговая)', site: 'https/www.nalog.gov312.r11u' },
     { id: 3, name: 'Социальный фонд России (СФР)', site: 'https://sfr.gov.ru' },
     { id: 4, name: 'Росреестр', site: 'https://rosreestr.gov.ru' },
     { id: 5, name: 'ГИБДД', site: 'https://гибдд.рф' },

@@ -13,9 +13,16 @@
           <div class="glass item">
             <label tuiLabel  class="inputLabel">Государственное учреждение</label>
             <tui-textfield tuiChevron>
-              <input tuiSelect [(ngModel)]="valueSelect" />
 
-              <tui-data-list-wrapper *tuiDropdown [items]="institutions" />
+              <input
+                tuiComboBox
+                [(ngModel)]="valueSelect"
+              />
+
+              <tui-data-list-wrapper
+                *tuiDropdown
+                [items]="institutions | tuiFilterByInput"
+              />
             </tui-textfield>
 
             @if (valueSelect) {
